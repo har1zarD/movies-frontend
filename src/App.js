@@ -6,24 +6,24 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/login_component";
 import SignUp from "./components/signup_component";
 import UserDetails from "./components/userDetails";
-import ImageUpload from "./components/imageUpload.";
+import Movies from "./components/movies";
+import TodMovies from "./components/todmovies";
+import SoonMovies from "./components/soonmovies";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={isLoggedIn == "true" ? <UserDetails /> : <Login />}
-          />
-          <Route path="/sign-in" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/userDetails" element={<UserDetails />} />
+          <Route exact path='/' element={isLoggedIn == "true" ? <Movies /> : <Movies />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/userDetails' element={<UserDetails />} />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/todmovies' element={<TodMovies />} />
+          <Route path='/soonmovies' element={<SoonMovies />} />
         </Routes>
-        {/* <ImageUpload/> */}
       </div>
     </Router>
   );

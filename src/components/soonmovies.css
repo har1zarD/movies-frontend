@@ -1,0 +1,126 @@
+.bg-custom {
+  background-color: black;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.nav-link {
+  color: white !important;
+  font-size: 31px;
+  font-weight: bold;
+  font-family: "Fira Sans";
+}
+
+.btn-custom {
+  background-color: #e50914 !important;
+  font-weight: 800 !important;
+  color: black !important;
+}
+.btn-primary {
+  background-color: #e50914 !important;
+  font-weight: 800 !important;
+  color: white !important;
+  border: none;
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn-collection {
+  max-width: 241px;
+  margin: 2em auto;
+}
+
+.img-card {
+  margin: 5px 0px;
+  transition: 0.1s;
+}
+.img-card:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+}
+
+.btn-collection-playing {
+  max-width: 110px;
+  margin: 2em auto;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+.navbar {
+  font-family: "Raleway", Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  justify-content: center;
+}
+.navbar * {
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.navbar li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0 1.5em;
+  overflow: hidden;
+}
+.navbar a {
+  padding: 0.3em 0;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1px;
+  margin: 0;
+  text-decoration: none;
+}
+.navbar a:before,
+.navbar a:after {
+  position: absolute;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.navbar a:before {
+  top: 100%;
+  display: block;
+  height: 3px;
+  width: 100%;
+  content: "";
+  background-color: #c0392b;
+}
+.navbar a:after {
+  padding: 0.3em 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  content: attr(data-hover);
+  color: white;
+  white-space: nowrap;
+}
+.navbar li:hover a,
+.navbar .current a {
+  transform: translateY(-100%);
+}
+/* Demo purposes only */
+body {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #212121;
+}
+
+/* Demo purposes only */
+html {
+  height: 100%;
+}
+body {
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  margin: 0;
+  height: 100%;
+}

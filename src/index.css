@@ -1,14 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
-
+@import url(https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap);
 * {
   box-sizing: border-box;
 }
 body {
-  background: #1c8ef9 !important;
+  background: #1c8ef9;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Bruno Ace SC", cursive;
 }
 
 h1,
@@ -20,7 +19,10 @@ h6,
 label,
 span {
   font-weight: 500;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Bruno Ace SC", cursive;
+}
+p {
+  color: white;
 }
 
 body,
@@ -34,7 +36,6 @@ html,
 
 .navbar-light {
   background-color: #ffffff;
-  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 
 .auth-wrapper {
@@ -46,17 +47,19 @@ html,
 
 .auth-inner {
   width: 450px;
+  height: 650px;
   margin: auto;
   background: #ffffff;
-  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
-  border-radius: 15px;
+  border-radius: 6px;
   transition: all 0.3s;
+  background: rgb(0, 0, 0, 0.65);
 }
 
 .auth-wrapper .form-control:focus {
   border-color: #167bff;
-  box-shadow: none;
+  background-color: #343434;
+  color: white;
 }
 
 .auth-wrapper h3 {
@@ -64,6 +67,7 @@ html,
   margin: 0;
   line-height: 1;
   padding-bottom: 20px;
+  padding-top: 22px;
 }
 
 .custom-control-label {
@@ -86,5 +90,72 @@ html,
 table,
 th,
 td {
-  border: 1px solid black !important;
+  border: 1px solid black;
+}
+
+.auth-wrapper {
+  background-image: url("components/images/pozadina.png");
+  background-size: cover;
+}
+
+.signUptext {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: start;
+}
+
+.mb-3 {
+  padding-bottom: 12px;
+}
+
+.form-control {
+  height: 50px;
+}
+
+input.form-control {
+  background: #343434;
+  border: none;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  font-size: inherit;
+  color: white;
+}
+.button-prim {
+  background-color: red;
+  border-color: red;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background: red;
+  color: #fff;
+  font-size: inherit;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+.signup {
+  width: 100%;
+  margin-top: 13px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.help {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.p-text {
+  color: #999;
+  text-decoration: unset;
 }

@@ -1,24 +1,20 @@
 import React, { Component, useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import { useRef } from "react";
 export default function AdminHome({ userData }) {
-
   //setting state
   const [data, setData] = useState([]);
-  const [limit,setLimit]=useState(5);
-  const [pageCount,setPageCount]=useState(1);
-  const currentPage=useRef();
-
-
+  const [limit, setLimit] = useState(5);
+  const [pageCount, setPageCount] = useState(1);
+  const currentPage = useRef();
 
   useEffect(() => {
-    currentPage.current=1;
+    currentPage.current = 1;
     // getAllUser();
     getPaginatedUsers();
   }, []);
-
 
   //fetching all user
   const getAllUser = () => {
@@ -32,14 +28,11 @@ export default function AdminHome({ userData }) {
       });
   };
 
-
-
-//logout
+  //logout
   const logOut = () => {
     window.localStorage.clear();
     window.location.href = "./sign-in";
   };
-
 
   //deleting user
   const deleteUser = (id, name) => {
@@ -68,29 +61,27 @@ export default function AdminHome({ userData }) {
   //pagination
   function handlePageClick(e) {
     console.log(e);
-   currentPage.current=e.selected+1;
+    currentPage.current = e.selected + 1;
     getPaginatedUsers();
-   
-
   }
-  function changeLimit(){
-    currentPage.current=1;
+  function changeLimit() {
+    currentPage.current = 1;
     getPaginatedUsers();
   }
 
-  function getPaginatedUsers(){
-    fetch(`http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
-      method: "GET",
-    })
+  function getPaginatedUsers() {
+    fetch(
+      `http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userData");
         setPageCount(data.pageCount);
-        setData(data.result)
-        
-       
+        setData(data.result);
       });
-
   }
 
   return (
@@ -137,9 +128,9 @@ export default function AdminHome({ userData }) {
           nextClassName="page-item"
           nextLinkClassName="page-link"
           activeClassName="active"
-          forcePage={currentPage.current-1}
+          forcePage={currentPage.current - 1}
         />
-        <input placeholder="Limit" onChange={e=>setLimit(e.target.value)}/>
+        <input placeholder="Limit" onChange={(e) => setLimit(e.target.value)} />
         <button onClick={changeLimit}>Set Limit</button>
         <button onClick={logOut} className="btn btn-primary">
           Log Out

@@ -1,131 +1,92 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 
 export default function SignUp() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [firstName, setFname] = useState("");
+  const [lastName, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
-  const [secretKey, setSecretKey] = useState("");
 
   const handleSubmit = (e) => {
-    if (userType == "Admin" && secretKey != "AdarshT") {
-      e.preventDefault();
-      alert("Invalid Admin");
-    } else {
-      e.preventDefault();
+    e.preventDefault();
 
-      console.log(fname, lname, email, password);
-      fetch("http://localhost:5000/register", {
-        method: "POST",
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          fname,
-          email,
-          lname,
-          password,
-          userType,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data, "userRegister");
-          if (data.status == "ok") {
-            alert("Registration Successful");
-          } else {
-            alert("Something went wrong");
-          }
-        });
-    }
+    fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          window.location.href = "/login";
+        } else {
+          alert("Something went wrong");
+        }
+      });
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-inner">
+    <div className='auth-wrapper'>
+      <div className='auth-inner'>
         <form onSubmit={handleSubmit}>
-          <h3>Sign Up</h3>
-          <div>
-            Register As
+          <h3 className='signUptext'>Sign Up</h3>
+          <div className='mb-3'>
             <input
-              type="radio"
-              name="UserType"
-              value="User"
-              onChange={(e) => setUserType(e.target.value)}
-            />
-            User
-            <input
-              type="radio"
-              name="UserType"
-              value="Admin"
-              onChange={(e) => setUserType(e.target.value)}
-            />
-            Admin
-          </div>
-          {userType == "Admin" ? (
-            <div className="mb-3">
-              <label>Secret Key</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Secret Key"
-                onChange={(e) => setSecretKey(e.target.value)}
-              />
-            </div>
-          ) : null}
-
-          <div className="mb-3">
-            <label>First name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="First name"
+              type='text'
+              className='form-control'
+              placeholder='Unesite vaše ime'
+              value={firstName}
               onChange={(e) => setFname(e.target.value)}
             />
           </div>
-
-          <div className="mb-3">
-            <label>Last name</label>
+          <div className='mb-3'>
             <input
-              type="text"
-              className="form-control"
-              placeholder="Last name"
+              type='text'
+              className='form-control'
+              placeholder='Unesite vaše prezime'
+              value={lastName}
               onChange={(e) => setLname(e.target.value)}
             />
           </div>
-
-          <div className="mb-3">
-            <label>Email address</label>
+          <div className='mb-3'>
             <input
-              type="email"
-              className="form-control"
-              placeholder="Enter email"
+              type='email'
+              className='form-control'
+              placeholder='Unesite vašu e-mail adresu'
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
-          <div className="mb-3">
-            <label>Password</label>
+          <div className='mb-3'>
             <input
-              type="password"
-              className="form-control"
-              placeholder="Enter password"
+              type='password'
+              className='form-control'
+              placeholder='Unesite vašu lozinku'
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
+          <div className='d-grid'>
+            <button type='submit' className='button-prim'>
               Sign Up
             </button>
           </div>
-          <p className="forgot-password text-right">
-            Already registered <a href="/sign-in">sign in?</a>
-          </p>
+          <div className='u-singup'>
+            <div className='help'>
+              <div className='signup'>
+                <p className='p-text'>Već imate nalog? </p>
+                <a href='/login' className='p-text'>
+                  Prijavite se
+                </a>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
