@@ -1,135 +1,146 @@
-import React from "react";
-import "./soonmovies.css";
-import pimLogo from "./images/pim.png";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./movies.css";
+import DateSelect from "./Date";
+import selectedDate from "./Date";
 
-export default function SoonMovies() {
+function Movies() {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedProjection, setSelectedProjection] = useState(null);
+  const [date, setDate] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [singleMovie, setSingleMovie] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/soonmovies").then((response) => {
+      console.log(response);
+      setMovies(response.data);
+    });
+  }, []);
+
   const logOut = () => {
     window.localStorage.clear();
     window.location.href = "./login";
   };
 
+  const handleImageClick = async (id) => {
+    setSelectedProjection(id);
+    setShowConfirmation(true);
+    getMovieById(id);
+  };
+
+  const getMovieById = (id) => {
+    axios
+      .get(`http://localhost:5000/soonmovies/${id}`)
+      .then((response) => {
+        const movie = response.data;
+        console.log(movie);
+        if (movie) {
+          setSingleMovie(movie);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleDateSelect = (dateValue) => {
+    setDate(dateValue);
+  };
+  const handleConfirm = () => {
+    const confirmationNumber = Math.floor(Math.random() * 100000);
+    alert(`Vaša oznaka za kupovinu karata je: ${confirmationNumber}`);
+    setShowConfirmation(false);
+  };
+
+  const handleCancel = () => {
+    setSelectedProjection(null);
+    setDate(null);
+    setShowConfirmation(false);
+  };
+
   return (
     <div>
-      <ul class="navbar">
+      <ul className='navbar'>
+        <div>
+          <li>
+            <a href='/movies' data-hover='TOP FILMOVI'>
+              TOP FILMOVI
+            </a>
+          </li>
+          <li className='current'>
+            <a href='#' data-hover='USKORO U KINU'>
+              USKORO U KINU
+            </a>
+          </li>
+        </div>
         <li>
-          <a href="/movies" data-hover="TOP FILMOVI">
-            TOP FILMOVI
-          </a>
+          <button onClick={logOut} className='btn btn-primary logoutbtn'>
+            Log Out
+          </button>
         </li>
-        <li>
-          <a href="/todmovies" data-hover="DANAS U KINU">
-            DANAS U KINU
-          </a>
-        </li>
-        <li class="current">
-          <a href="#" data-hover="USKORO U KINU">
-            USKORO U KINU
-          </a>
-        </li>
-        <button onClick={logOut} className="btn btn-primary">
-          Log Out
-        </button>
       </ul>
       <div>
-        <h4
-          style={{ color: "white", fontWeight: "700" }}
-          className="text-center my-4"
-        >
+        <h4 style={{ color: "white", fontWeight: "700" }} className='text-center my-4 leading-6'>
           USKORO U KINU
         </h4>
       </div>
-      <div className="container">
-        <div className="row justify-content-around align-items-center">
-          <img
-            src="imagesMovies/slider1.jpg"
-            id="fafMovie"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider2.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider3.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider4.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider5.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider6.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider7.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider8.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
-          <img
-            src="imagesMovies/slider9.jpg"
-            className="img-card col-lg-4 col-md-6 col-sm-12 col-12"
-            style={{ maxWidth: 250, width: "90%" }}
-          />
+      <div class='films-container'>
+        <div class='film'>
+          {movies.map((movie) => {
+            return (
+              <div className='filmovi'>
+                <img
+                  src={movie.image}
+                  alt='movie'
+                  className='img-card col-lg-4 col-md-6 col-sm-12 col-12'
+                  style={{ maxWidth: 250, width: "90%" }}
+                  onClick={() => handleImageClick(movie._id)}
+                />
+                <p class='movie-title'>{movie.title}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
-        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
-        crossorigin="anonymous"
-      ></script>
+      {/* Modal for selecting projection and date */}
 
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
-        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
-        crossorigin="anonymous"
-      ></script>
+      {showConfirmation && (
+        <div
+          className='modal'
+          style={{
+            display: "block",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 9999,
+          }}
+        >
+          <div className='modal-dialog' style={{ margin: "10% auto", maxWidth: 600 }}>
+            <div className='modal-content'>
+              <div className='modal-header'>
+                <h5 className='modal-title'>Potvrda kupovine karata</h5>
+                <button type='button' className='close' onClick={handleCancel}>
+                  <span aria-hidden='true'>×</span>
+                </button>
+              </div>
+              <div className='modal-body'>
+                <div className='form-group'>
+                  <label htmlFor='projectionSelect'>Projekcija:</label>
+                  <h3 className='mb-4 mt-4'>Odabrali ste film: {singleMovie?.title}</h3>
+                  <h3 className='soon-text'>FILM USKORO U KINU</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+export default Movies;

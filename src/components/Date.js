@@ -37,9 +37,6 @@ const DatePicker = () => {
     <div className='form-group'>
       <label htmlFor='dateSelect'>Datum:</label>
       <select className='form-control' id='dateSelect' onChange={handleDateSelect} value={selectedDate}>
-        <option value='' disabled hidden>
-          Izaberite datum
-        </option>
         {renderOptions()}
       </select>
     </div>
