@@ -158,12 +158,39 @@ body {
   padding: 8px 12px;
   background: radial-gradient(circle, rgba(196, 40, 40, 1) 0%, rgba(54, 4, 14, 1) 100%);
 }
+.btn-secondary:hover {
+  background: radial-gradient(circle, rgb(219, 36, 36) 0%, rgba(139, 0, 0, 1) 100%);
+  /* Add your desired hover styles here */
+}
+.btn-secondary.active {
+  background: radial-gradient(circle, rgba(204, 20, 20, 0.863) 30%, rgb(126, 0, 25) 100%);
+  color: white;
+}
+
+.nastavihover:hover {
+  background: #1a5c1a;
+}
+
+.increment-button:hover {
+  background: #c0bfbf;
+}
+
+.decrement-button:hover {
+  background: #c0bfbf;
+}
+
+.close:hover {
+  background: #c0bfbf;
+}
 
 .odustani {
   color: #fff;
-  background-color: #b43737;
+  background-color: #961c1c;
   border-color: black;
   padding: 2px 10px 2px 10px;
+}
+.odustani:hover {
+  background: #5e1414;
 }
 
 .potvrdi {
@@ -171,6 +198,9 @@ body {
   background-color: #277427;
   border-color: black;
   padding: 2px 10px 2px 10px;
+}
+.potvrdi:hover {
+  background: #1d581d;
 }
 .projection-info {
   display: flex;

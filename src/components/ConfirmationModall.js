@@ -4,6 +4,7 @@ import axios from "axios";
 
 function ConfirmationModal({
   singleMovie,
+  userData,
   handleCancel,
   handleConfirm,
   ticketQuantity,
@@ -14,7 +15,7 @@ function ConfirmationModal({
   const [email, setEmail] = useState("");
   const [selectedProjection, setSelectedProjection] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
-  const [randomString, setRandomString] = useState(""); // Add state for random string
+  const [randomString, setRandomString] = useState("");
 
   const generateRandomString = (length) => {
     let result = "";
@@ -30,7 +31,6 @@ function ConfirmationModal({
   const handleEmailConfirm = () => {
     const price = parseFloat(singleMovie.price[selectedProjection]).toFixed(2);
 
-    // Generate a random alphanumeric string of length 8
     const generatedString = generateRandomString(8);
     setRandomString(generatedString);
 
@@ -40,11 +40,11 @@ function ConfirmationModal({
       hall: singleMovie.hall[selectedProjection],
       type: singleMovie.type[selectedProjection],
       price: price,
-      ticketQuantity: parseInt(ticketQuantity),
+      ticketQuantity: parseFloat(ticketQuantity).toFixed(0),
       selectedDate: selectedDate,
-      saldo: ticketQuantity * price,
+      saldo: parseFloat(ticketQuantity * price).toFixed(2),
       image: singleMovie.image,
-      randomString: generatedString, // Add the random string to movieData
+      randomString: generatedString,
     };
 
     const data = {
@@ -71,8 +71,8 @@ function ConfirmationModal({
     setShowEmailModal(false);
   };
 
-  const handleProjectionSelect = (projection) => {
-    setSelectedProjection(projection);
+  const handleProjectionSelect = (index) => {
+    setSelectedProjection(index);
   };
 
   const handleNastavi = () => {
@@ -118,8 +118,7 @@ function ConfirmationModal({
                 singleMovie.showtimes.map((time, index) => (
                   <button
                     type='button'
-                    className={`btn btn-secondary ${selectedProjection === index ? "selected" : ""}`}
-                    key={index}
+                    className={`btn btn-secondary ${selectedProjection === index ? "active" : ""}`}
                     onClick={() => handleProjectionSelect(index)}
                   >
                     <div className='projection-info'>
@@ -179,7 +178,7 @@ function ConfirmationModal({
             <button type='button' className='odustani' onClick={handleEmailCancel}>
               Odustani
             </button>
-            <button type='button' className='potvrdi' onClick={handleEmailConfirm} disabled={!email}>
+            <button type='button' className='potvrdi nastavihover' onClick={handleEmailConfirm} disabled={!email}>
               Potvrdi
             </button>
           </div>

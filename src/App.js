@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./components/login_component";
 import SignUp from "./components/signup_component";
+import PageNotFound from "./components/PageNotFound";
 
 import Movies from "./components/movies";
 import SoonMovies from "./components/soonmovies";
@@ -20,6 +21,7 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/movies' element={<Movies />} />
           <Route path='/soonmovies' element={<SoonMovies />} />
+          <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </div>
     </Router>

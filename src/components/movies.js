@@ -9,7 +9,9 @@ function Movies() {
   const [selectedProjection, setSelectedProjection] = useState(null);
   const [date, setDate] = useState(null);
   const [movies, setMovies] = useState([]);
+  const [user, setUser] = useState([]);
   const [singleMovie, setSingleMovie] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [email, setEmail] = useState("");
   const [movieData, setMovieData] = useState(null);
@@ -30,6 +32,7 @@ function Movies() {
     setSelectedProjection(id);
     setShowConfirmation(true);
     getMovieById(id);
+    getUserById(id);
   };
 
   const getMovieById = (id) => {
@@ -40,6 +43,21 @@ function Movies() {
         console.log(movie);
         if (movie) {
           setSingleMovie(movie);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getUserById = (id) => {
+    axios
+      .get(`http://localhost:5000/register/${id}`)
+      .then((response) => {
+        const user = response.data;
+        console.log(user);
+        if (user) {
+          setUserData(user);
         }
       })
       .catch((error) => {
@@ -64,6 +82,16 @@ function Movies() {
     alert(`Vaša oznaka za kupovinu karata je: ${confirmationNumber}`);
     setShowConfirmation(false);
     setShowEmailInput(false);
+
+    getUserById(selectedProjection)
+      .then((response) => {
+        const { firstName, lastName } = response;
+        // Ovdje možete koristiti firstName i lastName
+        console.log(firstName, lastName);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleEmailCancel = () => {
@@ -149,6 +177,7 @@ function Movies() {
         >
           <ConfirmationModal
             singleMovie={singleMovie}
+            userData={userData}
             handleCancel={handleCancel}
             handleConfirm={handleConfirm}
             ticketQuantity={ticketQuantity}
