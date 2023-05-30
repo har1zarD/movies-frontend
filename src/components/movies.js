@@ -17,7 +17,7 @@ function Movies() {
   const [movieData, setMovieData] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/movies").then((response) => {
+    axios.get("http://movies-backend-psi.vercel.app/movies").then((response) => {
       console.log(response);
       setMovies(response.data);
     });
