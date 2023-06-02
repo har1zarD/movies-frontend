@@ -1,12 +1,14 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./components/login_component";
 import SignUp from "./components/signup_component";
 import PageNotFound from "./components/PageNotFound";
-
 import Movies from "./components/movies";
 import SoonMovies from "./components/soonmovies";
 
@@ -15,8 +17,9 @@ function App() {
   return (
     <Router>
       <div className='App'>
+        <ToastContainer />
         <Routes>
-          <Route exact path='/' element={isLoggedIn === "true" ? <Movies /> : <Movies />} />
+          <Route exact path='/' element={isLoggedIn === "true" ? <Movies /> : <Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/movies' element={<Movies />} />

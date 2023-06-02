@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./movies.css";
-import DateSelect from "./Date";
-import selectedDate from "./Date";
+import { useNavigate } from "react-router-dom";
 
 function Movies() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -10,6 +9,7 @@ function Movies() {
   const [date, setDate] = useState(null);
   const [movies, setMovies] = useState([]);
   const [singleMovie, setSingleMovie] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:5000/soonmovies").then((response) => {
@@ -17,6 +17,13 @@ function Movies() {
       setMovies(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const logOut = () => {
     window.localStorage.clear();

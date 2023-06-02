@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
   const [firstName, setFname] = useState("");
@@ -26,7 +28,7 @@ export default function SignUp() {
         if (data.status === "ok") {
           window.location.href = "/login";
         } else {
-          alert("Something went wrong");
+          toast.error("Pogrešni podaci za registraciju");
         }
       });
   };

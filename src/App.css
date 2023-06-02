@@ -38,3 +38,7 @@
     transform: rotate(360deg);
   }
 }
+
+.Toastify__toast--error {
+  font-family: "Helvetica", sans-serif;
+}

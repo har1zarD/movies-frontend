@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ConfirmationModal({
   singleMovie,
@@ -56,10 +58,10 @@ function ConfirmationModal({
     axios
       .post("http://localhost:5000/sendemail", data)
       .then((response) => {
-        alert("E-pošta je uspješno poslana!");
+        toast.success("E-pošta je uspješno poslana!");
       })
       .catch((error) => {
-        alert("Došlo je do greške prilikom slanja e-pošte: " + error.message);
+        toast.error("Došlo je do greške prilikom slanja e-pošte: " + error.message);
       });
 
     handleConfirm(email);

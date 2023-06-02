@@ -339,3 +339,7 @@ body {
     margin-right: 0;
   }
 }
+
+.Toastify__toast--error {
+  font-family: "Helvetica", sans-serif;
+}

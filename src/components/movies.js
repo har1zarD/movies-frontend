@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./movies.css";
 import ConfirmationModal from "./ConfirmationModall";
+import { useNavigate } from "react-router-dom";
 
 function Movies() {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -15,6 +16,7 @@ function Movies() {
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [email, setEmail] = useState("");
   const [movieData, setMovieData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:5000/movies").then((response) => {
@@ -22,6 +24,13 @@ function Movies() {
       setMovies(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const logOut = () => {
     window.localStorage.clear();
@@ -71,31 +80,6 @@ function Movies() {
 
   const handleConfirm = () => {
     setShowEmailInput(true);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleEmailConfirm = (email) => {
-    const confirmationNumber = Math.floor(Math.random() * 100000);
-    alert(`Vaša oznaka za kupovinu karata je: ${confirmationNumber}`);
-    setShowConfirmation(false);
-    setShowEmailInput(false);
-
-    getUserById(selectedProjection)
-      .then((response) => {
-        const { firstName, lastName } = response;
-        // Ovdje možete koristiti firstName i lastName
-        console.log(firstName, lastName);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleEmailCancel = () => {
-    setShowEmailInput(false);
   };
 
   const handleCancel = () => {

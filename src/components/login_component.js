@@ -1,8 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,18 +28,23 @@ export default function Login() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
-        if (data.status == "ok") {
-          alert("login successful");
-
-          window.localStorage.setItem("token", data.token); // assuming that the token is returned from the backend as 'token'
+        if (data.status === "ok") {
+          toast.success("Prijava uspešna");
+          window.localStorage.setItem("token", data.token);
           window.localStorage.setItem("loggedIn", true);
-
           window.location.href = "/movies";
         } else {
-          alert("Invalid login credentials");
+          toast.error("Pogrešni podaci za prijavu");
         }
       });
   }
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token) {
+      navigate("/movies");
+    }
+  }, [navigate]);
 
   return (
     <div className='auth-wrapper'>
